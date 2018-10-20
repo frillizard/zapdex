@@ -11,23 +11,14 @@ class App extends React.Component {
     this.state = { 
       currentPkmn: bulbasaur,
       shiny: '',
-      shinyToggle: false
+      shinyToggle: false,
     }
+    this.search = this.search.bind(this);
   }
 
   componentDidMount() {
-    console.log('did mount says hi');
-    // $.ajax({
-    //   url: '/pokemon', 
-    //   success: (newPkmn) => {
-    //     this.setState({
-    //       currentPkmn: newPkmn
-    //     })
-    //   },
-    //   error: (err) => {
-    //     console.log('err', err);
-    //   }
-    // });
+    // console.log(this.state.currentPkmn.id + 1);
+    // this.search('bulbasaur');
   }
 
   toggleShiny() {
@@ -44,7 +35,8 @@ class App extends React.Component {
       method: 'GET',
       data: pkmn,
       success: (res) => {
-        console.log(`response from server after GET request: ${res}`);
+        // console.log(`response from server after GET request:`, res);
+        this.setState({currentPkmn: res});
       },
       error: (err) => {
         console.log('GET error: ', err);
@@ -53,11 +45,13 @@ class App extends React.Component {
   }
 
   render () {
+    let next = this.state.currentPkmn.id + 1;
     return (<div>
       {/* <button onClick={()=>this.toggleShiny()}>hi</button> */}
       <PkmnViewer pokemon={this.state.currentPkmn} shiny={this.state.shiny} toggleShiny={this.toggleShiny.bind(this)}/>
       <br></br>
-      <Search search={this.search.bind(this)}/>
+      <Search search={this.search}/>
+      {/* <button onClick={() => this.search(next)}>Next</button> */}
     </div>)
   }
 }
