@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import PkmnViewer from './components/PkmnViewer.jsx';
-import bulbasaur from '../../database/test/new-bulbasaur.json';
+import bulbasaur from '../../database/test/bulbasaur.json';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,8 +17,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(this.state.currentPkmn.id + 1);
-    // this.search('bulbasaur');
   }
 
   toggleShiny() {
@@ -34,9 +32,8 @@ class App extends React.Component {
       url: '/pokemon',
       method: 'GET',
       data: pkmn,
-      success: (res) => {
-        // console.log(`response from server after GET request:`, res);
-        this.setState({currentPkmn: res});
+      success: (newPkmn) => {
+        this.setState({currentPkmn: newPkmn});
       },
       error: (err) => {
         console.log('GET error: ', err);
