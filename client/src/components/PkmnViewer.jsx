@@ -12,7 +12,7 @@ const PokemonViewer = ({pokemon: {name, id, genus, flavor_text}, shiny, toggleSh
   return (
     <div>
       <img onClick={()=> toggleShiny()} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${shiny}${id}.png`}></img>
-      <div>{neatID} - {name[0].toUpperCase() + name.slice(1)} - {genus}</div>
+      <div>{neatID} - {name[0].toUpperCase() + name.slice(1)} - The {genus}</div>
       <div>
       {/* {types.map((t => {
         let type = t.type.name

@@ -11,7 +11,7 @@ class App extends React.Component {
     this.state = { 
       currentPkmn: bulbasaur,
       shiny: '',
-      shinyToggle: false,
+      shinyToggle: true,
     }
     this.search = this.search.bind(this);
   }
@@ -45,13 +45,12 @@ class App extends React.Component {
   }
 
   render () {
-    let next = this.state.currentPkmn.id + 1;
     return (<div>
-      {/* <button onClick={()=>this.toggleShiny()}>hi</button> */}
       <PkmnViewer pokemon={this.state.currentPkmn} shiny={this.state.shiny} toggleShiny={this.toggleShiny.bind(this)}/>
       <br></br>
       <Search search={this.search}/>
-      {/* <button onClick={() => this.search(next)}>Next</button> */}
+      <button disabled={this.state.currentPkmn.id === 1} onClick={() => this.search(JSON.stringify(this.state.currentPkmn.id - 1))}>Prev</button>
+      <button disabled={this.state.currentPkmn.id === 802} onClick={() => this.search(JSON.stringify(this.state.currentPkmn.id + 1))}>Next</button>
     </div>)
   }
 }
