@@ -5,12 +5,13 @@ var db = require('../database');
 var app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.get('/pokemon', function (req, res) {
-
-  res.send('server says: hi');
+  let searchQuery = req._parsedOriginalUrl.query;
+  // console.log(req);
+  res.send(searchQuery);
 });
 
 app.listen(3000, function() {
