@@ -27,7 +27,6 @@ class App extends React.Component {
   }
 
   search (pkmn) {
-    console.log(`${pkmn} was searched`);
     $.ajax({
       url: '/pokemon',
       method: 'GET',

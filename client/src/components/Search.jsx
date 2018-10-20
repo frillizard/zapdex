@@ -32,7 +32,7 @@ class Search extends React.Component {
   render() {
     return (<div>
       Enter a pokemon: <input value={this.state.pkmn} onChange={this.onChange} onKeyPress={this.onEnter}/>       
-      <button onClick={this.search}> Search </button>
+      <button disabled={!this.state.pkmn} onClick={this.search}> Search </button>
     </div>) 
   }
 }
