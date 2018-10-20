@@ -4,7 +4,7 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pkmn: 'charizard'
+      pkmn: ''
     }
     this.onChange = this.onChange.bind(this);
     this.onEnter = this.onEnter.bind(this);
@@ -32,7 +32,7 @@ class Search extends React.Component {
   render() {
     return (<div>
       Enter a pokemon: <input value={this.state.pkmn} onChange={this.onChange} onKeyPress={this.onEnter}/>       
-      <button disabled={!this.state.pkmn} onClick={this.search}> Search </button>
+      <button disabled={!this.state.pkmn} onClick={this.search}>Search</button>
     </div>) 
   }
 }

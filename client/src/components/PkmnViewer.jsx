@@ -20,8 +20,8 @@ const PokemonViewer = ({pokemon: {name, id, genus, flavor_text}, shiny, toggleSh
       }))} */}
       </div>
       <br></br>
-      <div>{flavor_text.split('\n').map(text => {
-        return <div> {text} </div>;
+      <div>{flavor_text.split('\n').map((text, i) => {
+        return <div key={i}> {text} </div>;
       })}</div>
     </div>
   )

@@ -11,11 +11,26 @@ app.use(bodyParser.json());
 
 app.get('/pokemon', function (req, res) {
   let searchQuery = req._parsedOriginalUrl.query;
-  pokemonSearch(searchQuery, (err, pokemon) => {
+  db.find(searchQuery, (err, pokemon) => {
     if (err) {
       throw err;
     }
     res.send(pokemon);
+  });
+});
+
+app.post('/pokemon', function (req, res) {
+  let search = req.body.pkmn;
+  pokemonSearch(search, (err, pokemon) => {
+    if (err) {
+      throw err;
+    }
+    db.save(pokemon, (err, pokemon) => {
+      if (err) {
+        throw err;
+      }
+      res.send(pokemon);
+    });
   })
 });
 
