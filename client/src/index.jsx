@@ -10,14 +10,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      currentPkmn: bulbasaur,
+      currentPkmn: {},
       shiny: '',
       shinyToggle: true,
     }
     this.search = this.search.bind(this);
+    this.random = this.random.bind(this);
+    this.autoChange = this.autoChange.bind(this)
   }
 
   componentDidMount() {
+    this.search(JSON.stringify(Math.floor(Math.random() * 802)));
   }
 
   toggleShiny() {
@@ -25,6 +28,10 @@ class App extends React.Component {
       shinyToggle: !this.state.shinyToggle,
     });
     this.state.shinyToggle ? this.setState({shiny:'/shiny/'}) : this.setState({shiny:''});
+  }
+
+  random () {
+    this.search(JSON.stringify(Math.floor(Math.random() * 802)));
   }
 
   search (pkmn) {
@@ -89,14 +96,18 @@ class App extends React.Component {
   // }
 
   render () {
-    return (<div>
+    return (<div className="mainContainer">
       <PkmnViewer pokemon={this.state.currentPkmn} shiny={this.state.shiny} toggleShiny={this.toggleShiny.bind(this)}/>
-      <br></br>
-      <Search search={this.search}/>
-      <button disabled={this.state.currentPkmn.id === 1} onClick={() => this.search(JSON.stringify(this.state.currentPkmn.id - 1))}>Prev</button>
-      <button disabled={this.state.currentPkmn.id === 802} onClick={() => this.search(JSON.stringify(this.state.currentPkmn.id + 1))}>Next</button>
-      <button onClick={this.autoChange.bind(this)}>Auto Next</button>
-      <button onClick={()=> clearInterval(interval)}>Stop</button>
+      <span className="infoContainer">
+      <div className="text">
+        <Search search={this.search}/>
+        <button disabled={this.state.currentPkmn.id === 1} onClick={() => this.search(JSON.stringify(this.state.currentPkmn.id - 1))}>Prev</button>
+        <button disabled={this.state.currentPkmn.id === 802} onClick={() => this.search(JSON.stringify(this.state.currentPkmn.id + 1))}>Next</button>
+        <button onClick={this.random}>Random</button>
+        <button onClick={()=> {clearInterval(interval); this.autoChange()}}>Auto Next</button>
+        <button onClick={()=> clearInterval(interval)}>Stop</button>
+      </div>
+      </span>
     </div>)
   }
 }
